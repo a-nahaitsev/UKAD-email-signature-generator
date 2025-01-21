@@ -7,4 +7,5 @@ export interface FormDataProps {
   bookACallLinkName: string;
   bookACallLinkValue: string;
   photo: string;
+  useUrl: boolean;
 }

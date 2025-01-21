@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FormGroup from "./FormGroup";
 import { FormDataProps } from "@/types";
 import { Label } from "./ui/label";
@@ -10,11 +10,8 @@ interface Form {
 }
 
 const Form: React.FC<Form> = ({ formData, setFormData }) => {
-  const [useUrl, setUseUrl] = useState(true);
-
   const handleToggle = (checked: boolean) => {
-    setUseUrl(checked);
-    setFormData((prev) => ({ ...prev, photo: "" }));
+    setFormData((prev) => ({ ...prev, photo: "", useUrl: checked }));
   };
 
   return (
@@ -93,18 +90,18 @@ const Form: React.FC<Form> = ({ formData, setFormData }) => {
           <div className="flex items-center gap-2">
             <Switch
               id="imageToggle"
-              checked={useUrl}
+              checked={formData.useUrl}
               onCheckedChange={handleToggle}
             />
             <Label htmlFor="imageToggle" className="text-sm font-medium">
-              {useUrl
+              {formData.useUrl
                 ? "Use an Image URL (recommended for email clients like Gmail)"
                 : "Upload an Image File (for email clients that support embedded HTML)"}
               :
             </Label>
           </div>
 
-          {useUrl ? (
+          {formData.useUrl ? (
             <FormGroup
               label="Profile Photo URL (recommended: square image 64x64 px)"
               id="photo"

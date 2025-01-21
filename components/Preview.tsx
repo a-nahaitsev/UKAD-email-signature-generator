@@ -3,7 +3,12 @@ import { Button } from "./ui/button";
 import Instructions from "./Instructions";
 import { FormDataProps } from "@/types";
 import { useToast } from "@/hooks/use-toast";
-import { DEFAULT_PROFILE_PHOTO, UKAD_LOGO } from "@/constants";
+import {
+  DEFAULT_PROFILE_PHOTO_BASE64,
+  DEFAULT_PROFILE_PHOTO_URL,
+  UKAD_LOGO_BASE64,
+  UKAD_LOGO_URL,
+} from "@/constants";
 import { useRef } from "react";
 
 const TOAST_MESSAGES = {
@@ -24,9 +29,14 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
     bookACallLinkName,
     bookACallLinkValue,
     photo,
+    useUrl,
   } = formData;
 
-  const profilePhoto = photo.length > 0 ? photo : DEFAULT_PROFILE_PHOTO;
+  const defaultProfilePhoto = useUrl
+    ? DEFAULT_PROFILE_PHOTO_URL
+    : DEFAULT_PROFILE_PHOTO_BASE64;
+  const profilePhoto = photo.length > 0 ? photo : defaultProfilePhoto;
+  const companyLogo = useUrl ? UKAD_LOGO_URL : UKAD_LOGO_BASE64;
 
   let htmlContent = `
     <table style="max-width: 650px; width: 100%; font-family: Calibri, Arial, sans-serif; padding: 2px;" cellpadding="0" cellspacing="0" role="presentation">
@@ -90,7 +100,7 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
         </td>
         <td width="70px" align="right" style="vertical-align: top;">
           <div style="width: 64px; height: 16px;">
-            <img alt="" width="64px" height="16px" style="width: 64px; height: 16px;" src="${UKAD_LOGO}">
+            <img alt="" width="64px" height="16px" style="width: 64px; height: 16px;" src="${companyLogo}">
           </div>
         </td>
       </tr>

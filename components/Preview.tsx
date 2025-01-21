@@ -6,6 +6,11 @@ import { useToast } from "@/hooks/use-toast";
 import { DEFAULT_PROFILE_PHOTO, UKAD_LOGO } from "@/constants";
 import { useRef } from "react";
 
+const TOAST_MESSAGES = {
+  SUCCESS: "Signature copied! Paste it directly into your email client.",
+  ERROR: "Unable to copy the signature. Please try again.",
+};
+
 const Preview = ({ formData }: { formData: FormDataProps }) => {
   const { toast } = useToast();
   const tableRef = useRef<HTMLTableElement | null>(null);
@@ -100,9 +105,9 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(htmlContent);
-      toast({ description: "Copied" });
+      toast({ description: TOAST_MESSAGES.SUCCESS });
     } catch {
-      toast({ description: "Failed to copy", variant: "destructive" });
+      toast({ description: TOAST_MESSAGES.ERROR, variant: "destructive" });
     }
   };
 
@@ -119,11 +124,9 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
           }),
         ]);
 
-        alert(
-          "Table copied as HTML! You can now paste it into an email client."
-        );
+        toast({ description: TOAST_MESSAGES.SUCCESS });
       } catch (err) {
-        console.error("Failed to copy table as HTML:", err);
+        toast({ description: TOAST_MESSAGES.ERROR, variant: "destructive" });
       }
     }
   };
@@ -132,7 +135,7 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
     <section className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 p-2 border border-gray-100 rounded-lg shadow-lg">
         <span className="text-2xl border-b p-1 font-medium tracking-wider">
-          Preview
+          Signature Preview
         </span>
         <div>
           <div
@@ -146,7 +149,7 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
       </div>
       <div className="flex flex-col gap-3 p-2 border border-gray-100 rounded-lg shadow-lg">
         <span className="text-2xl border-b p-1 font-medium tracking-wider">
-          Signature source code
+          Signature HTML Source Code
         </span>
         <div>
           <Textarea

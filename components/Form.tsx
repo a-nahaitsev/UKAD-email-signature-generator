@@ -10,11 +10,11 @@ interface Form {
 }
 
 const Form: React.FC<Form> = ({ formData, setFormData }) => {
-  const [useUrl, setUseUrl] = useState(true); // Toggle between URL and Base64
+  const [useUrl, setUseUrl] = useState(true);
 
   const handleToggle = (checked: boolean) => {
     setUseUrl(checked);
-    setFormData((prev) => ({ ...prev, photo: "" })); // Reset photo field when toggling
+    setFormData((prev) => ({ ...prev, photo: "" }));
   };
 
   return (

@@ -1,4 +1,3 @@
-import DOMPurify from "dompurify";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import Instructions from "./Instructions";
@@ -98,8 +97,6 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
     </table>
   `;
 
-  const sanitizedContent = DOMPurify.sanitize(htmlContent);
-
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(htmlContent);
@@ -140,7 +137,7 @@ const Preview = ({ formData }: { formData: FormDataProps }) => {
         <div>
           <div
             ref={tableRef}
-            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
           <Button onClick={copyTableAsHtml} className="mt-4 w-full">
             Copy signature

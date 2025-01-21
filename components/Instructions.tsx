@@ -4,26 +4,36 @@ const Instructions = () => {
       <span className="text-2xl border-b p-1 font-medium tracking-wider">
         Instructions
       </span>
-      <ul className="flex flex-col gap-2 pl-5 marker:text-black list-disc">
+      <ol className="flex flex-col gap-2 pl-5 marker:text-black list-decimal">
         <li>
-          <p>
-            <span className="font-semibold">Email clients like Gmail: </span>
-            Press "Copy signature" button in the{" "}
-            <span className="italic underline">Preview</span> block and paste it
-            into an email client.
-          </p>
+          <span className="font-semibold">Email clients like Gmail: </span>
+
+          <ul className="pl-6 marker:text-black list-disc">
+            <li>
+              Click the "Copy Signature" button located in the Preview section.
+            </li>
+            <li>
+              Paste the copied signature directly into your email client's
+              signature settings.
+            </li>
+          </ul>
         </li>
         <li>
-          <p>
-            <span className="font-semibold">
-              Email clients that support HTML signatures:{" "}
-            </span>
-            Press "Copy signature source code" button in the{" "}
-            <span className="italic underline">Signature source code</span>{" "}
-            block and paste it into the signature settings of your email client.
-          </p>
+          <span className="font-semibold">
+            Email clients that support HTML signatures:{" "}
+          </span>
+          <ul className="pl-6 marker:text-black list-disc">
+            <li>
+              Click the "Copy Signature Source Code" button in the Signature
+              Source Code section.
+            </li>
+            <li>
+              Paste the copied HTML code into the signature settings of your
+              email client.
+            </li>
+          </ul>
         </li>
-      </ul>
+      </ol>
     </div>
   );
 };
